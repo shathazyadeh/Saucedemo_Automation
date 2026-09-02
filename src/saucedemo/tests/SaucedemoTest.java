@@ -67,14 +67,48 @@ public class SaucedemoTest {
         driver.findElement(By.id("user-name")).sendKeys("standard_user");     
         Thread.sleep(2000);
         driver.findElement(By.id("login-button")).click();
+      
+        
+        
         // Verify successful login and redirect to inventory page
         
         String currentUrl = driver.getCurrentUrl();
         boolean loginSuccess = currentUrl.contains("inventory.html");
         System.out.println("Login successful and redirected to inventory: " + loginSuccess);
         Thread.sleep(2000);
+     // Verify Products page title display and text
+        boolean isProductsTitleDisplayed = driver.findElement(By.cssSelector("span.title")).isDisplayed();
+        String productsTitleText = driver.findElement(By.cssSelector("span.title")).getText();
+        boolean isProductsTitleCorrect = productsTitleText.equals("Products");
+
+        System.out.println("Products title is displayed: " + isProductsTitleDisplayed);
+        System.out.println("Products title text is correct: " + isProductsTitleCorrect);
+        Thread.sleep(2000);
     
+        //Verify cart icon, add item, check badge display, and validate badge count
         
+        boolean isCartIconDisplayed = driver.findElement(By.cssSelector("a.shopping_cart_link")).isDisplayed();
+        System.out.println("Shopping cart icon is displayed: " + isCartIconDisplayed);
+        Thread.sleep(2000);
+        
+        
+        boolean isaddToCartDisplayed = driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).isDisplayed();
+        System.out.println("Add to Cart  Button is displayed: " + isaddToCartDisplayed);
+
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.id("add-to-cart-sauce-labs-bike-light")).click();
+        Thread.sleep(2000);
+        
+        boolean isBadgeDisplayed = driver.findElement(By.cssSelector("span.shopping_cart_badge")).isDisplayed();
+        System.out.println("Cart badge is displayed: " + isBadgeDisplayed);
+        Thread.sleep(2000);
+
+        
+       String cartBadgeText =driver.findElement(By.cssSelector("span.shopping_cart_badge")).getText();
+       boolean isCartBadgeCorrect = cartBadgeText.equals("2");
+       System.out.println("Cart badge is displayed and number is correct (2): " + isCartBadgeCorrect);
+		Thread.sleep(2000);
         
         /*Verify successful login and redirect to
          *  inventory page by checking the visibility 
@@ -85,7 +119,7 @@ public class SaucedemoTest {
            System.out.println("Menu icon is displayed : " + isMenuIconDisplayed );
            
            driver.findElement(By.id("react-burger-menu-btn")).click();
-           Thread.sleep(000);
+           Thread.sleep(2000);
            
            boolean isLogoutDisplayed = driver.findElement(By.id("logout_sidebar_link")).isDisplayed();
            System.out.println("Logout Link is displayed : " + isLogoutDisplayed );
