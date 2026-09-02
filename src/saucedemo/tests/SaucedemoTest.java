@@ -18,7 +18,6 @@ public class SaucedemoTest {
 
 		System.out.println("Logo is displayed: " + logoDisplayed);
 		System.out.println("Logo text is: " + logoText);
-		Thread.sleep(2000);
 		//Verify input fields & login button display
 		
 		boolean usernameDisplayed = driver.findElement(By.id("user-name")).isDisplayed();
@@ -74,32 +73,31 @@ public class SaucedemoTest {
         boolean loginSuccess = currentUrl.contains("inventory.html");
         System.out.println("Login successful and redirected to inventory: " + loginSuccess);
         Thread.sleep(2000);
-        
-     /*Verify successful login and redirect to
-      *  inventory page by checking the visibility 
-      *  of the Logout link  
-     */  
+    
         
         
-        boolean isMenuIconDisplayed = driver.findElement(By.id("react-burger-menu-btn")).isDisplayed();
-        System.out.println("Menu icon is displayed: " + isMenuIconDisplayed );
-        
-        driver.findElement(By.id("react-burger-menu-btn")).click();
-        Thread.sleep(4000);
-        
-        boolean isLogoutDisplayed = driver.findElement(By.id("logout_sidebar_link")).isDisplayed();
-        System.out.println("Logout Link is displayed: " + isLogoutDisplayed );
-        Thread.sleep(2000);
+        /*Verify successful login and redirect to
+         *  inventory page by checking the visibility 
+         *  of the Logout link  
+        */  
+           
+           boolean isMenuIconDisplayed = driver.findElement(By.id("react-burger-menu-btn")).isDisplayed();
+           System.out.println("Menu icon is displayed : " + isMenuIconDisplayed );
+           
+           driver.findElement(By.id("react-burger-menu-btn")).click();
+           Thread.sleep(000);
+           
+           boolean isLogoutDisplayed = driver.findElement(By.id("logout_sidebar_link")).isDisplayed();
+           System.out.println("Logout Link is displayed : " + isLogoutDisplayed );
+           Thread.sleep(2000);
+           
+           driver.findElement(By.id("logout_sidebar_link")).click();
+           Thread.sleep(2000);
 
-        
-        driver.findElement(By.id("logout_sidebar_link")).click();
-        Thread.sleep(2000);
-
-        String currentUrlAfterLogout = driver.getCurrentUrl();
-        boolean logoutSuccess = currentUrlAfterLogout.equals("https://www.saucedemo.com/");
-        System.out.println("Logout successful and redirected to Login Page: " + logoutSuccess);
-        Thread.sleep(2000);
-        
+           String currentUrlAfterLogout = driver.getCurrentUrl();
+           boolean logoutSuccess = currentUrlAfterLogout.equals("https://www.saucedemo.com/");
+           System.out.println("Logout successful and redirected to Login Page: " + logoutSuccess);
+           
         
         // Close the Browser
         driver.quit();
